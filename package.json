@@ -1,6 +1,6 @@
 {
-  "name": "gas-clasp-starter",
-  "version": "1.2.1",
+  "name": "google-sites-notifier",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/howdy39/gas-clasp-starter.git"
+    "url": "git+https://github.com/HasegawaMasahide/google-sites-notifier.git"
   },
   "keywords": [
     "gas",
@@ -21,10 +21,11 @@
   "author": "howdy39",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/howdy39/gas-clasp-starter/issues"
+    "url": "https://github.com/HasegawaMasahide/google-sites-notifier/issues"
   },
-  "homepage": "https://github.com/howdy39/gas-clasp-starter#readme",
+  "homepage": "https://github.com/HasegawaMasahide/google-sites-notifier#readme",
   "devDependencies": {
+    "@google/clasp": "^2.1.0",
     "@types/google-apps-script": "0.0.53",
     "@types/jest": "24.0.13",
     "cpx": "1.5.0",
@@ -54,5 +55,8 @@
       "json",
       "node"
     ]
+  },
+  "dependencies": {
+    "acorn-dynamic-import": "^4.0.0"
   }
 }

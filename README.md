@@ -1,8 +1,7 @@
-# gas-clasp-starter
-A starter template for Google Apps Script by [google/clasp](https://github.com/google/clasp)
-
-## Article
-[(Japanese) Google Apps Script をローカル環境で快適に開発するためのテンプレートを作りました](https://qiita.com/howdy39/items/0e799a9bfc1d3bccf6e5)
+# google-sites-notifier
+Google Sitesの更新通知メールを適当な間隔でまとめ、送信するGASです。
+GAS APIが新しいSitesでも使えるようになったらお役御免……
+[gas-clasp-starter](https://github.com/howdy39/gas-clasp-starter)をテンプレートとして利用。
 
 ## Tech Stack
 - [google/clasp](https://github.com/google/clasp)
@@ -15,13 +14,15 @@ A starter template for Google Apps Script by [google/clasp](https://github.com/g
 ## Prerequisites
 - [Node.js](https://nodejs.org/)
 - [google/clasp](https://github.com/google/clasp)
+- Gmailの準備
+  - Google Sitesのサイトに対する変更通知をオンにする。
+  - 変更通知メールのみに適用されるようなフィルタとラベルを設定する。
 
 ## Getting Started
 ### Clone the repository
 ```
-git clone --depth=1 https://github.com/howdy39/gas-clasp-starter.git <project_name>
+git clone https://github.com/HasegawaMasahide/google-sites-notifier.git <project_name>
 cd <project_name>
-rm -Rf .git
 ```
 
 ### Install dependencies
@@ -30,24 +31,37 @@ npm install
 ```
 
 ### Configuration
-#### Open `.clasp.json`, change scriptId
-What is scriptId ? https://github.com/google/clasp#scriptid-required
+#### スプレッドシートの作成
+Google Sitesにアクセスできるユーザでスプレッドシートを作成します。
+
+#### スクリプトIDの設定(.clasp.json)
 ```
 {
   "scriptId": <your_script_id>,
   "rootDir": "dist"
 }
 ```
-
-#### Open `src/appsscript.json`, change timeZone (optional)
-[Apps Script Manifests](https://developers.google.com/apps-script/concepts/manifests)
+#### スプレッドシートIDの設定(src/service/sheet.service.ts)
 ```
-{
-  "timeZone": "Asia/Tokyo", ## Change timeZone
-  "dependencies": {
-  },
-  "exceptionLogging": "STACKDRIVER"
+export class SheetService {
+  static ss: Spreadsheet = SpreadsheetApp.openById('<your_spread_sheet_id>');
+  ...
 }
+```
+#### メールの設定(src/service/mail.service.ts)
+```
+const result = GmailApp.sendEmail(
+  '<mailaddress>',
+  '<title>',
+  '',
+  { htmlBody: body }
+);
+```
+```
+static fetchMails(since: Date): GmailMessage[] {
+    const threads = GmailApp.search('label:<your_label> newer:' + this.formatDate(since));
+    ...
+  }
 ```
 
 ### Development and build project
@@ -59,16 +73,6 @@ npm run build
 ```
 clasp push
 ```
-
-## Others
-### howdy39/gas-clasp-library
-[howdy39/gas-clasp-library](https://github.com/howdy39/gas-clasp-library) is sample project made with [Google Apps Script Libraries](https://developers.google.com/apps-script/guides/libraries).   
-also, `gas-clasp-library` use circle CI.
-
-### takanakahiko/sao-clasp
-[takanakahiko/sao-clasp](https://github.com/takanakahiko/sao-clasp) was made based on gas-clasp-starter and [SAO](https://github.com/saojs/sao).
-
-
 
 ## License
 This software is released under the MIT License, see LICENSE.txt.
