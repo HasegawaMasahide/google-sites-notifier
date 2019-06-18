@@ -74,5 +74,9 @@ npm run build
 clasp push
 ```
 
+### シートの初期化とトリガーの設定
+- ```clasp push```後、ブラウザでスクリプトを開き「initSheets」を実行する。
+- 「sendNotice」に対し、適当な時間間隔でトリガーを設定する。
+
 ## License
 This software is released under the MIT License, see LICENSE.txt.
