@@ -1,4 +1,5 @@
 import { Type } from './type';
+import { DateUtil } from '../date.util';
 
 export class History {
   date: Date;
@@ -19,7 +20,7 @@ export class History {
   toMailString(): string {
     return (
       '<li>' +
-      this.date +
+      DateUtil.formatDateTime(this.date) +
       ' ' +
       this.author +
       ' さんが <a href="' +

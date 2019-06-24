@@ -16,8 +16,10 @@ export namespace Type {
   export function toType(arg: string) {
     switch (arg) {
       case '作成':
+      case '追加':
         return Type.Create;
       case '更新':
+      case '添付':
         return Type.Update;
     }
   }
