@@ -51,10 +51,10 @@ export class SheetService {
 #### メールの設定(src/service/mail.service.ts)
 ```
 const result = GmailApp.sendEmail(
-  '<mailaddress>',
+  '<mailaddress,mailaddress>',
   '<title>',
   '',
-  { htmlBody: body }
+  { htmlBody: body, cc:'<mailaddress,mailaddress>' }
 );
 ```
 ```
