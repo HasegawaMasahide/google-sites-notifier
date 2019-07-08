@@ -11,7 +11,7 @@ export class Mail {
   }
 
   toHistory(): History {
-    if (/(添付しました)/.test(this.title)) {
+    if (/(添付しました)|(削除しました)/.test(this.title)) {
     } else {
       // TODO 正規表現つかって抽出する
       const coreMessage = this.text
