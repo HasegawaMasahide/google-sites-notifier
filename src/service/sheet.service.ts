@@ -3,7 +3,7 @@ import { History } from '../model/history';
 import { Type } from '../model/type';
 
 export class SheetService {
-  static ss: Spreadsheet = SpreadsheetApp.openById('<your_spread_sheet_id>');
+  static ss: Spreadsheet = SpreadsheetApp.openById(process.env.SPREAD_SHEET_ID);
 
   static store(histories: History[]): void {
     const store = this.ss.getSheetByName('store');

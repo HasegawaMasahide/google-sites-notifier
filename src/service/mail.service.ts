@@ -4,7 +4,9 @@ import { DateUtil } from '../date.util';
 
 export class MailService {
   static fetchMails(since: Date): GmailMessage[] {
-    const threads = GmailApp.search('label:<your_label> newer:' + DateUtil.formatDate(since));
+    const threads = GmailApp.search(
+      'label:' + process.env.SEARCH_LABEL + ' newer:' + DateUtil.formatDate(since)
+    );
     let messages = [];
     GmailApp.getMessagesForThreads(threads).forEach((thread) =>
       thread.forEach((message) => messages.push(message))
@@ -18,6 +20,9 @@ export class MailService {
     grouped.forEach((history) => (body += history.toMailString()));
     body += '</ul>';
 
-    const result = GmailApp.sendEmail('<mailaddress>', '<title>', '', { htmlBody: body });
+    const result = GmailApp.sendEmail(process.env.EMAIL_TO, process.env.EMAIL_TITLE, '', {
+      htmlBody: body,
+      cc: process.env.EMAIL_CC,
+    });
   }
 }

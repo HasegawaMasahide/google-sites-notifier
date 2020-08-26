@@ -34,35 +34,21 @@ npm install
 #### スプレッドシートの作成
 Google Sitesにアクセスできるユーザでスプレッドシートを作成します。
 
-#### スクリプトIDの設定(.clasp.json)
+#### 環境変数の設定
 ```
-{
-  "scriptId": <your_script_id>,
-  "rootDir": "dist"
-}
+cp .env.sample .env
+cp .clasp.json.sample .clasp.json
 ```
-#### スプレッドシートIDの設定(src/service/sheet.service.ts)
-```
-export class SheetService {
-  static ss: Spreadsheet = SpreadsheetApp.openById('<your_spread_sheet_id>');
-  ...
-}
-```
-#### メールの設定(src/service/mail.service.ts)
-```
-const result = GmailApp.sendEmail(
-  '<mailaddress,mailaddress>',
-  '<title>',
-  '',
-  { htmlBody: body, cc:'<mailaddress,mailaddress>' }
-);
-```
-```
-static fetchMails(since: Date): GmailMessage[] {
-    const threads = GmailApp.search('label:<your_label> newer:' + this.formatDate(since));
-    ...
-  }
-```
+
+| ファイル | 変数名 | 設定値 |
+| --- | --- | --- |
+| .clasp.json | <your_script_id> | GASのID |
+| .env | SPREAD_SHEET_ID | スプレッドシートのID |
+| .env | EMAIL_TITLE | 送信するメールのタイトル |
+| .env | EMAIL_TO | 送信するメールの宛先(TO), カンマ区切りで複数入力可 |
+| .env | EMAIL_CC | 送信するメールの宛先(CC), カンマ区切りで複数入力可 |
+| .env | SEARCH_LABEL | Google Siteの更新通知メールに付与されるラベル名(検索対象) |
+
 
 ### Development and build project
 ```
@@ -71,7 +57,9 @@ npm run build
 
 ### Push
 ```
-clasp push
+npm run build
+npx clasp login
+npx clasp push
 ```
 
 ### シートの初期化とトリガーの設定
