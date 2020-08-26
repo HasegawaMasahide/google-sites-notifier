@@ -29,7 +29,7 @@ global.sendNotice = (): void => {
     MailService.send(grouped);
 
     // change flags
-    SheetService.fripSendFlag(histories);
+    SheetService.flipSendFlag(histories);
   }
 };
 

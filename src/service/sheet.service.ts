@@ -44,7 +44,7 @@ export class SheetService {
     return values.map((row) => new History(row)).filter((history) => !history.isSent);
   }
 
-  static fripSendFlag(histories: History[]): number {
+  static flipSendFlag(histories: History[]): number {
     const store = this.ss.getSheetByName('store');
     let counter = 0;
     store
