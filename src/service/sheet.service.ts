@@ -15,17 +15,17 @@ export class SheetService {
       .getDataRange()
       .getValues()
       .slice(1)
-      .map(row => new History(row));
-    const unique = histories.filter(history => !stored.some(s => history.isEqual(s)));
+      .map((row) => new History(row));
+    const unique = histories.filter((history) => !stored.some((s) => history.isEqual(s)));
 
-    unique.forEach(history => {
+    unique.forEach((history) => {
       store.appendRow([
         history.date,
         history.author,
         history.title,
         history.url,
         Type.toString(history.type),
-        history.isSent
+        history.isSent,
       ]);
     });
 
@@ -41,7 +41,7 @@ export class SheetService {
     const store = this.ss.getSheetByName('store');
     let values = store.getDataRange().getValues();
     values.splice(0, 1);
-    return values.map(row => new History(row)).filter(history => !history.isSent);
+    return values.map((row) => new History(row)).filter((history) => !history.isSent);
   }
 
   static fripSendFlag(histories: History[]): number {
@@ -54,7 +54,7 @@ export class SheetService {
         if (index === 0) return;
         if (
           histories.some(
-            history =>
+            (history) =>
               new Date(row[0]).getTime() === history.date.getTime() &&
               row[1] === history.author &&
               row[2] === history.title
@@ -71,14 +71,14 @@ export class SheetService {
     // TODO トランスパイルかませてもGAS上でSetが使えなかった
     // const titles = new Set(histories.map(history => history.title));
     let titles = [];
-    histories.forEach(history => {
+    histories.forEach((history) => {
       if (titles.indexOf(history.title) === -1) {
         titles.push(history.title);
       }
     });
     const sorted = histories.sort(History.compare);
     // const grouped = [...titles].map(title => sorted.find(history => history.title === title));
-    const grouped = titles.map(title => sorted.filter(history => history.title === title)[0]); // Array.findが使えなかった
+    const grouped = titles.map((title) => sorted.filter((history) => history.title === title)[0]); // Array.findが使えなかった
 
     return grouped;
   }

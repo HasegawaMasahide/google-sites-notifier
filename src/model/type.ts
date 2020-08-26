@@ -1,6 +1,6 @@
 export enum Type {
   Create,
-  Update
+  Update,
 }
 
 export namespace Type {

@@ -10,9 +10,9 @@ global.fetchHistories = (): void => {
   const messages = MailService.fetchMails(lastMessagesDate);
 
   const histories = messages
-    .map(message => new Mail(message))
-    .map(mail => mail.toHistory())
-    .filter(history => history !== undefined);
+    .map((message) => new Mail(message))
+    .map((mail) => mail.toHistory())
+    .filter((history) => history !== undefined);
 
   SheetService.store(histories);
 };

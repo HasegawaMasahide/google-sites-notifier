@@ -10,7 +10,7 @@ describe('History', () => {
       'title',
       'url',
       Type.Create,
-      false
+      false,
     ]);
     const h2 = new History([
       new Date(2019, 1, 1).toString(),
@@ -18,7 +18,7 @@ describe('History', () => {
       'title',
       'url',
       Type.Create,
-      false
+      false,
     ]);
     const h3 = new History([
       new Date(2019, 1, 2).toString(),
@@ -26,7 +26,7 @@ describe('History', () => {
       'title',
       'url',
       Type.Create,
-      false
+      false,
     ]);
     const h4 = new History([
       new Date(2019, 1, 1).toString(),
@@ -34,7 +34,7 @@ describe('History', () => {
       'title',
       'url',
       Type.Create,
-      false
+      false,
     ]);
     const h5 = new History([
       new Date(2019, 1, 1).toString(),
@@ -42,7 +42,7 @@ describe('History', () => {
       'title2',
       'url',
       Type.Create,
-      false
+      false,
     ]);
 
     it('should be true', () => {

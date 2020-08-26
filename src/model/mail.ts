@@ -14,10 +14,7 @@ export class Mail {
     if (/(添付しました)|(削除しました)/.test(this.title)) {
     } else {
       // TODO 正規表現つかって抽出する
-      const coreMessage = this.text
-        .split('xhtml">')[1]
-        .split('しました')[0]
-        .trim();
+      const coreMessage = this.text.split('xhtml">')[1].split('しました')[0].trim();
       const author = coreMessage.replace(/ /, '').split('さん')[0];
       const title = coreMessage.split('">')[1].split('</a')[0];
       const url = coreMessage.split('href="')[1].split('">')[0];
