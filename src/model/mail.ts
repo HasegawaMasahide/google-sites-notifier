@@ -1,6 +1,6 @@
 import { History } from './history';
 export class Mail {
-  date: Date;
+  date: GoogleAppsScript.Base.Date;
   title: string;
   text: string;
 
